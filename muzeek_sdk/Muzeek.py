@@ -34,7 +34,7 @@ class Muzeek:
     VERSION                         = '1.0.0'
 
     ## @const string Default endpoint of Muzeek PHP SDK.
-    APP_ENDPOINT_DEFAULT            = 'https://api.debug.muzeek.co'
+    APP_ENDPOINT_DEFAULT            = 'https://api.muzeek.co'
 
     ## @const string The name of the environment variable that contains the app ID.
     APP_ID_ENV_NAME                 = 'MUZEEK_APP_ID'
