@@ -20,7 +20,7 @@
 
 from helpers     import *
 from credentials import *
-from Muzeek      import *
+from muzeek      import *
 
 import random
 

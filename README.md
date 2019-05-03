@@ -17,7 +17,7 @@ Simple Muzeek Query Example
 ```Python
 import random
 
-from Muzeek import *
+from muzeek import *
 
 api = Muzeek({"app_token" : app_token})
 
