@@ -31,12 +31,13 @@ def printIDCard(idcard):
   coverurl     = metadata["cover"]["medium"];
   musicurl     = idcard["urls"]["LOW"]; # Warning this url expires in 3 minutes
   prettyname   = ("%s %d (%s, %s)" % (metadata["title"], metadata["recordId"], metadata["genre"], metadata["subgenre"]));
-  descriptor   = ("Duration:%ds, Tempo:%dBPM, Pitch:%s, Signature:%d/%d" % (round(metadata["duration"] / 1000), metadata["tempo"], metadata["pitch"], metadata["numerator"], metadata["denominator"]));
+  descriptor   = ("Duration:%ds, Tempo:%dBPM, Pitch:%s, Signature:%d/%d" % (round(metadata["duration"] / 1000), int(metadata["tempo"]), metadata["pitch"], int(metadata["numerator"]), int(metadata["denominator"])));
 
-  print("Display name : prettyname");
-  print("Description  : descriptor");
-  print("Cover URL    : coverurl");
-  print("Music URL    : musicurl");
+  print("Display name : " + prettyname);
+  print("Description  : " + descriptor);
+  print("Cover URL    : " + coverurl);
+  print("Music URL    : " + musicurl);
+  print()
 
   return None;
 
@@ -58,7 +59,7 @@ def retreivetoken(clientid):
     if os.path.isfile(".muzeektoken_" + clientid):
         with open(".muzeektoken_" + clientid) as infile:
             token = json.load(infile)
-        if time.time() < token["expiration"]:
+        if float(time.time()) < float(token["expiration"]):
             return token;
 
     return None;

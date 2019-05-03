@@ -34,7 +34,7 @@ class Muzeek:
     VERSION                         = '1.0.0'
 
     ## @const string Default endpoint of Muzeek PHP SDK.
-    APP_ENDPOINT_DEFAULT            = 'https://api.muzeek.co'
+    APP_ENDPOINT_DEFAULT            = 'https://api.debug.muzeek.co'
 
     ## @const string The name of the environment variable that contains the app ID.
     APP_ID_ENV_NAME                 = 'MUZEEK_APP_ID'
@@ -93,18 +93,18 @@ class Muzeek:
         response                = None
 
         ## Optional Authentication:
-        headers                 = {}
-        headers['Content-Type'] = 'application/json'
-        uname                   = ""
+        uname                   = ''
         temp                    = os.uname()
         for key in temp:
-            uname += key + " "
-        uname = uname.strip(" ")
+            uname += key + ' '
+        uname = uname.strip(' ')
 
+        headers                 = {}
         headers['User-Agent']   = 'Muzeek-Python-SDK/' + self.VERSION + ' (' + uname + ')'
+        headers['Content-Type'] = 'application/json'
 
         if self.config['app_token'] != None:
-            headers.append('Authorization: Bearer ' + self.config['app_token']['value']);
+            headers['Authorization'] = 'Bearer ' + self.config['app_token']['value']
 
         if method == "GET":
             response            = requests.get(url = url, json = data, headers = headers)
@@ -209,12 +209,6 @@ class Muzeek:
 
         return False
 
-    def asort(self, d):
-        return sorted(d.items(), key=lambda x: x[1])
-
-    def ksort(self, d):
-         return [(k,d[k]) for k in sorted(d.keys())]
-
     ## Filter all available genre and subgenre
     ##
     ## @param array genre
@@ -225,15 +219,13 @@ class Muzeek:
         output                     = {}
 
         for item in genres:
-            if item['genre'] in output:
-                output[item['genre']] = {}
-
+            if not item['genre'] in output:
+                output[item['genre']] = []
             output[item['genre']].append(item['subgenre'])
 
-        for key,value in enumerate(output):
-            output[key] = self.asort(output[key])
-
-        output = self.ksort(output)
+        # sort each list
+        for index,key in enumerate(output):
+            output[key] = sorted(output[key])
 
         return output
 
@@ -248,7 +240,7 @@ class Muzeek:
         if result != None:
             return self._genres2dictionnary(result)
 
-        return False
+        return None
 
 
     ## Assemble a search query
@@ -327,7 +319,7 @@ class Muzeek:
         output['metadata']['duration'] = card['totalDuration']
         output['urls']                 = card['urls']
 
-        unset(output['metadata']['characteristics'])
+        del output['metadata']['characteristics']
         return output
 
 

@@ -44,7 +44,7 @@ if app_token != None or api.apiLogin(client_id, MUZEEK_TOS):
     if genres != None:
 
         ## -- pick a random genre
-        genre = random.sample(genres.keys())
+        genre = random.sample(genres.keys(), 1)
 
         ## -- create a search query
         query = api.makeQuery(genre, subgenre = None, title = None, tags = None)
@@ -52,15 +52,15 @@ if app_token != None or api.apiLogin(client_id, MUZEEK_TOS):
         ## -- request a standard generated music
         idcard = api.generate(query)
         if idcard != None:
-            print(idcard)
+            printIDCard(idcard)
         ## -- if you already have a license for this title, you may don't have to request a new one
         ## -- please check the terms of the license  (https:##app.muzeek.co/#/conditions-premium)
         ## -- Get a license on the title (mandatory to get unwatermarked files and full quality
         license = None
-        if license == "None":
+        if idcard["license"] == "None":
             license = api.license(idcard["finalHash"])
 
-        if idcard["license"] != "None" or license["status"] == "approved":
+        if idcard["license"] != "None" or (license != None and license["status"] == "approved"):
             ## -- Get a new URL only available once the song licensed
             url = api.getMusicURL(idcard["finalHash"], "HIGH")
             if url != None:
@@ -72,6 +72,7 @@ if app_token != None or api.apiLogin(client_id, MUZEEK_TOS):
                 ## -- use the data
                 print("Fresh url :")
                 print(url)
+                print()
 
 if haserror:
     print("Error : ")
