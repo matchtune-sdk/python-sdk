@@ -30,7 +30,7 @@ def printIDCard(idcard):
   metadata     = idcard["metadata"];
   coverurl     = metadata["cover"]["medium"];
   musicurl     = idcard["urls"]["LOW"]; # Warning this url expires in 3 minutes
-  prettyname   = ("%s %d (%s, %s)" % (metadata["title"], metadata["recordId"], metadata["genre"], metadata["subgenre"]));
+  prettyname   = ("%s %s" % (metadata["title"], str(metadata["recordId"])));
   descriptor   = ("Duration:%ds, Tempo:%dBPM, Pitch:%s, Signature:%d/%d" % (round(metadata["duration"] / 1000), int(metadata["tempo"]), metadata["pitch"], int(metadata["numerator"]), int(metadata["denominator"])));
 
   print("Display name : " + prettyname);

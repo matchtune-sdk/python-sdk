@@ -44,7 +44,7 @@ if app_token != None or api.apiLogin(client_id, MATCHTUNE_TOS):
     if genres != None:
 
         ## -- pick a random genre
-        genre = random.sample(genres.keys(), 1)
+        genre = random.sample(genres, 1)
 
         ## -- create a search query
         query = api.makeQuery(genre, subgenre = None, title = None, tags = None)

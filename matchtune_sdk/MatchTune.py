@@ -101,7 +101,7 @@ class MatchTune:
 
         headers                 = {}
         headers['User-Agent']   = 'MatchTune-Python-SDK/' + self.VERSION + ' (' + uname + ')'
-        headers['Content-Type'] = 'application/json'
+        headers['Content-Type']  = 'application/json'
 
         if self.config['app_token'] != None:
             headers['Authorization'] = 'Bearer ' + self.config['app_token']['value']
@@ -209,36 +209,13 @@ class MatchTune:
 
         return False
 
-    ## Filter all available genre and subgenre
+    ## Retreive all available genre
     ##
-    ## @param array genre
-    ##   Result from api call GET /genres
-    ##
-    ## @return array of genres & subgenres
-    def _genres2dictionnary(self, genres):
-        output                     = {}
-
-        for item in genres:
-            if not item['genre'] in output:
-                output[item['genre']] = []
-            output[item['genre']].append(item['subgenre'])
-
-        # sort each list
-        for index,key in enumerate(output):
-            output[key] = sorted(output[key])
-
-        return output
-
-
-    ## Retreive all available genre and subgenre
-    ##
-    ## @return array of genres & subgenres
+    ## @return array of genres
     def genres(self):
-        data = {}
-
-        result = self.callAPI('genres', 'GET', data)
+        result = self.callAPI('classifiers', 'GET')
         if result != None:
-            return self._genres2dictionnary(result)
+            return result["genres"]
 
         return None
 
@@ -247,9 +224,6 @@ class MatchTune:
     ##
     ## @param string genre
     ##   Genre from the list of genre (possible to send an array of genre)
-    ##
-    ## @param string subgenre
-    ##   Subgenre from the list of subgenre (possible to send an array of subgenre)
     ##
     ## @param string title
     ##   Title of a known matrix (possible to send an array of title)
@@ -261,10 +235,7 @@ class MatchTune:
     def makeQuery(self, genre = None, subgenre = None, title = None, tags = None):
         query = {}
         if genre != None:
-            query['genre']             = genre
-
-        if subgenre != None:
-            query['subgenre']          = subgenre
+            query['genres']            = genre
 
         if title != None:
             query['title']             = title
@@ -312,6 +283,8 @@ class MatchTune:
     ##
     ## @return array filtered output
     def _filterIDCard(self, card):
+        if isinstance(card, list):
+            card = card[0]
         output = {}
         output['license']              = card['license']
         output['finalHash']            = card['finalHash']
@@ -319,7 +292,6 @@ class MatchTune:
         output['metadata']['duration'] = card['totalDuration']
         output['urls']                 = card['urls']
 
-        del output['metadata']['characteristics']
         return output
 
 
@@ -330,9 +302,9 @@ class MatchTune:
     ##
     ## @return array idcard
     def generate(self, query = {}):
-        data = {'data' : {'type' : 'musics', 'attributes' : query}}
+        data = {'data' : {'type' : 'search', 'attributes' : query}}
 
-        result = self.callAPI('musics', 'POST', data)
+        result = self.callAPI('search', 'POST', data)
         if result != None:
             return self._filterIDCard(result)
 

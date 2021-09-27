@@ -45,10 +45,10 @@ if app_token != None or api.apiLogin(client_id, MATCHTUNE_TOS):
     if genres != None:
 
         ## -- pick a random genre
-        genre = random.sample(genres.keys(), 1)
+        genre = random.sample(genres, 1)
 
         ## -- create a search query
-        query = api.makeQuery(genre, subgenre = None, title = None, tags = None)
+        query = api.makeQuery(genre, title = None, tags = None)
 
         ## -- request a climax @ 10s with riser and drop if available
         features = [api.makeClimaxFeature(10000, True, True)]
