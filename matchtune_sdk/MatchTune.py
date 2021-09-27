@@ -354,8 +354,8 @@ class MatchTune:
         attributes['duration']   = duration
         attributes['syncPoints'] = features
 
-        data = {'data' : {'type' : 'customize', 'attributes' : attributes}}
-        result = self.callAPI('musics', 'POST', data)
+        data = {'data' : {'type' : 'search', 'attributes' : attributes}}
+        result = self.callAPI('search', 'POST', data)
         if result != None:
             return self._filterIDCard(result)
 
@@ -381,9 +381,9 @@ class MatchTune:
         attributes['duration']         = duration
         attributes['syncPoints']       = features
 
-        data = {'data' : {'type' : 'customize', 'attributes' : attributes}}
+        data = {'data' : {'type' : 'search', 'attributes' : attributes}}
 
-        result = self.callAPI('musics', 'POST', data)
+        result = self.callAPI('search', 'POST', data)
         if result != None:
             return self._filterIDCard(result)
 
