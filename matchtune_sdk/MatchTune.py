@@ -1,13 +1,13 @@
-# Copyright 2019 Muzeek Inc.
+# Copyright 2021 MatchTune Inc.
 #
 # You are hereby granted a non-exclusive, worldwide, royalty-free license to
 # use, copy, modify, and distribute this software in source code or binary
 # form for use in connection with the web services and APIs provided by
-# Muzeek.
+# MatchTune.
 #
-# As with any software that integrates with the Muzeek platform, your use
-# of this software is subject to the Muzeek terms of services and
-# Policies [https://app.muzeek.co/terms-of-service]. This copyright notice
+# As with any software that integrates with the MatchTune platform, your use
+# of this software is subject to the MatchTune terms of services and
+# Policies [https://www.matchtune.com/privacy-policy]. This copyright notice
 # shall be included in all copies or substantial portions of the software.
 #
 # THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -25,25 +25,25 @@ import base64
 import hashlib
 import requests
 
-## Class Muzeek
+## Class MatchTune
 ##
-## @package Muzeek
-class Muzeek:
+## @package MatchTune
+class MatchTune:
 
-    ## @const string Version number of the Muzeek PHP SDK.
+    ## @const string Version number of the MatchTune PHP SDK.
     VERSION                         = '1.0.0'
 
-    ## @const string Default endpoint of Muzeek PHP SDK.
-    APP_ENDPOINT_DEFAULT            = 'https://api.muzeek.co'
+    ## @const string Default endpoint of MatchTune PHP SDK.
+    APP_ENDPOINT_DEFAULT            = 'https://api.matchtune.com'
 
     ## @const string The name of the environment variable that contains the app ID.
-    APP_ID_ENV_NAME                 = 'MUZEEK_APP_ID'
+    APP_ID_ENV_NAME                 = 'MATCHTUNE_APP_ID'
 
     ## @const string The name of the environment variable that contains the app secret.
-    APP_SECRET_ENV_NAME             = 'MUZEEK_APP_SECRET'
+    APP_SECRET_ENV_NAME             = 'MATCHTUNE_APP_SECRET'
 
     ## @const string The name of the environment variable that contains the app secret.
-    APP_TOKEN_ENV_NAME              = 'MUZEEK_APP_TOKEN'
+    APP_TOKEN_ENV_NAME              = 'MATCHTUNE_APP_TOKEN'
 
     ## @var array The configuration store.
     config                          = {}
@@ -52,7 +52,7 @@ class Muzeek:
     lasterror                       = None
 
 
-    ## Instantiates a new Muzeek super-class object.
+    ## Instantiates a new MatchTune super-class object.
     ##
     ## @param array config
     ##   You should set app_id / app_secret / app_token in the contructor or in the environment
@@ -100,7 +100,7 @@ class Muzeek:
         uname = uname.strip(' ')
 
         headers                 = {}
-        headers['User-Agent']   = 'Muzeek-Python-SDK/' + self.VERSION + ' (' + uname + ')'
+        headers['User-Agent']   = 'MatchTune-Python-SDK/' + self.VERSION + ' (' + uname + ')'
         headers['Content-Type'] = 'application/json'
 
         if self.config['app_token'] != None:
@@ -160,7 +160,7 @@ class Muzeek:
     ##   Identification for the client ex device UUID, account identification, email etc ...
     ##
     ## @param boolean tos
-    ##   Acceptation of the terms of services as listed https://www.getmuzeek.com/terms-of-service
+    ##   Acceptation of the terms of services as listed https://www.matchtune.com/privacy-policy
     ##
     ## @return boolean
     ##   True if successfull, False otherwise
@@ -391,7 +391,7 @@ class Muzeek:
 
 
     ## License one or many ai-generated musics
-    ## see https://app.muzeek.co/#/conditions-premium for more details
+    ## see https://www.matchtune.com/license-information for more details
     ## applyCharges automatically purchase the track, api user can automatically set it to true
     ## users that logs in with a regular account (not an api key) should first retreive a quote using applyCharges = false
     ## api users can only purchase premium licenses

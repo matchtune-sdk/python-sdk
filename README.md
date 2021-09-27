@@ -1,25 +1,25 @@
-# Muzeek SDK for Python
+# MatchTune SDK for Python
 
-This repository contains the open source Muzeek SDK that allows you to access the Muzeek API from your Python app.
+This repository contains the open source MatchTune SDK that allows you to access the MatchTune API from your Python app.
 
 ## Installation
 
-The Muzeek Python SDK can be installed with [Pip](https://pip.pypa.io/en/stable/installing/). Run this command:
+The MatchTune Python SDK can be installed with [Pip](https://pip.pypa.io/en/stable/installing/). Run this command:
 
 ```sh
-pip install muzeek-sdk
+pip install matchtune-sdk
 ```
 
 ## Usage
 
-Simple Muzeek Query Example
+Simple MatchTune Query Example
 
 ```Python
 import random
 
-from muzeek_sdk import Muzeek
+from matchtune_sdk import MatchTune
 
-api = Muzeek({"app_token" : app_token})
+api = MatchTune({"app_token" : app_token})
 
 haserror = True
 ## -- Load genre & subgenre list
@@ -45,12 +45,12 @@ if genres != None:
 
 ## Api documentation
 
-All mechanisms developed here are documented on our [REST API documentation](https://developer.muzeek.co/).
+All mechanisms developed here are documented on our [REST API documentation](https://api-doc.matchtune.com/).
 
 ## License
 
-Please see the [license file](https://github.com/muzeek/python-sdk/blob/master/LICENSE) for more information.
+Please see the [license file](https://github.com/matchtune-sdk/python-sdk/blob/master/LICENSE) for more information.
 
 ## Security Vulnerabilities
 
-If you have found a security issue, please contact the support team directly at [support@muzeek.co](mailto:support@muzeek.co).
+If you have found a security issue, please contact the support team directly at [support@matchtune.com](mailto:support@matchtune.com).

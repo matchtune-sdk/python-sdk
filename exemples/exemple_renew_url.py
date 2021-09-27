@@ -1,13 +1,13 @@
-## Copyright 2019 Muzeek Inc.
+## Copyright 2019 MatchTune Inc.
 ##
 ## You are hereby granted a non-exclusive, worldwide, royalty-free license to
 ## use, copy, modify, and distribute this software in source code or binary
 ## form for use in connection with the web services and APIs provided by
-## Muzeek.
+## MatchTune.
 ##
-## As with any software that integrates with the Muzeek platform, your use
-## of this software is subject to the Muzeek terms of services and
-## Policies [https:##app.muzeek.co/terms-of-service]. This copyright notice
+## As with any software that integrates with the MatchTune platform, your use
+## of this software is subject to the MatchTune terms of services and
+## Policies [https://www.matchtune.com/privacy-policy]. This copyright notice
 ## shall be included in all copies or substantial portions of the software.
 ##
 ## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -18,23 +18,23 @@
 ## FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ## DEALINGS IN THE SOFTWARE.
 
-from helpers     import *
-from credentials import *
-from muzeek_sdk  import Muzeek
+from helpers        import *
+from credentials    import *
+from matchtune_sdk  import MatchTune
 
 import random
 
-client_id = MUZEEK_CLIENT_ID
+client_id = MATCHTUNE_CLIENT_ID
 app_token = retreivetoken(client_id)
-api = Muzeek({  "app_token"   : app_token,
-                "app_id"      : MUZEEK_APP_ID,
-                "app_secret"  : MUZEEK_APP_SECRET})
+api = MatchTune({  "app_token"   : app_token,
+                   "app_id"      : MATCHTUNE_APP_ID,
+                   "app_secret"  : MATCHTUNE_APP_SECRET})
 version = api.apiVersion()
 print("API Version : " + version)
 
 haserror = True
 ## -- login if needed
-if app_token != None or api.apiLogin(client_id, MUZEEK_TOS):
+if app_token != None or api.apiLogin(client_id, MATCHTUNE_TOS):
 
     ## -- save the token
     savetoken(client_id, api.getCurrentToken())
@@ -54,7 +54,7 @@ if app_token != None or api.apiLogin(client_id, MUZEEK_TOS):
         if idcard != None:
             printIDCard(idcard)
         ## -- if you already have a license for this title, you may don't have to request a new one
-        ## -- please check the terms of the license  (https:##app.muzeek.co/#/conditions-premium)
+        ## -- please check the terms of the license  (https://www.matchtune.com/license-information)
         ## -- Get a license on the title (mandatory to get unwatermarked files and full quality
         license = None
         if idcard["license"] == "None":

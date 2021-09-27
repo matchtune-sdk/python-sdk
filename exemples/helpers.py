@@ -1,13 +1,13 @@
-## Copyright 2019 Muzeek Inc.
+## Copyright 2021 MatchTune Inc.
 ##
 ## You are hereby granted a non-exclusive, worldwide, royalty-free license to
 ## use, copy, modify, and distribute this software in source code or binary
 ## form for use in connection with the web services and APIs provided by
-## Muzeek.
+## MatchTune.
 ##
-## As with any software that integrates with the Muzeek platform, your use
-## of this software is subject to the Muzeek terms of services and
-## Policies [https://app.muzeek.co/terms-of-service]. This copyright notice
+## As with any software that integrates with the MatchTune platform, your use
+## of this software is subject to the MatchTune terms of services and
+## Policies [https://www.matchtune.com/privacy-policy]. This copyright notice
 ## shall be included in all copies or substantial portions of the software.
 ##
 ## THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -46,7 +46,7 @@ def printIDCard(idcard):
 ## @return null
 ##
 def savetoken(clientid, token):
-  with open(".muzeektoken_" + clientid, 'w') as outfile:
+  with open(".matchtunetoken_" + clientid, 'w') as outfile:
     json.dump(token, outfile)
 
   return None;
@@ -56,8 +56,8 @@ def savetoken(clientid, token):
 ## @return token
 ##
 def retreivetoken(clientid):
-    if os.path.isfile(".muzeektoken_" + clientid):
-        with open(".muzeektoken_" + clientid) as infile:
+    if os.path.isfile(".matchtunetoken_" + clientid):
+        with open(".matchtunetoken_" + clientid) as infile:
             token = json.load(infile)
         if float(time.time()) < float(token["expiration"]):
             return token;
